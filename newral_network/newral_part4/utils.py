@@ -6,7 +6,7 @@ def preprocess(df):
         return df
     
     def remove_fare_amount_outliers(df, lower_bound, upper_bound):
-        df = df[(df['fare_amount'] > lower_bound) & (df['fare_amount'])]
+        df = df[(df['fare_amount'] > lower_bound) & (df['fare_amount'] <= upper_bound)]
         return df
     
     def replace_passenger_count_outliers(df):
@@ -25,7 +25,7 @@ def preprocess(df):
             df = df[(df[long] > nyc_min_longitude) & (df[long] < nyc_max_longitude)]
 
         for lat in ['pickup_latitude', 'dropoff_latitude']:
-            df = df([df[lat] > nyc_min_latitude] & (df[lat < nyc_max_latitude]))
+            df = df[(df[lat] > nyc_min_latitude) & (df[lat] < nyc_max_latitude)]
         return df
     
     df = remove_missing_values(df)
